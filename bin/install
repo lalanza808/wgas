@@ -2,6 +2,9 @@
 
 # wgas user_data install script (Ubuntu 18.04)
 
+set -x
+set -e
+
 APP_REPO=https://github.com/lalanza808/wgas
 APP_USER=wgas
 APP_SVC=wgas
