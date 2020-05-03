@@ -9,9 +9,16 @@ User=$APP_USER
 Group=$APP_USER
 LimitNOFILE=1024
 
+Environment=WGAS_PUBKEY=$WGAS_PUBKEY
+Environment=WGAS_ENDPOINT=$WGAS_ENDPOINT
+Environment=WGAS_SUDO=$WGAS_SUDO
+Environment=WGAS_DNS=$WGAS_DNS
+Environment=WGAS_ROUTE=$WGAS_ROUTE
+Environment=WGAS_PORT=$WGAS_PORT
+
 Restart=on-failure
 RestartSec=10
-startLimitIntervalSec=60
+StartLimitIntervalSec=60
 
 WorkingDirectory=$APP_HOME
 ExecStart=$APP_HOME/target/release/wgas
