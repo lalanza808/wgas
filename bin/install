@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# wgas user_data install script (Ubuntu 18.04)
+
+APP_REPO=https://github.com/lalanza808/wgas
+APP_USER=wgas
+APP_SVC=wgas
+APP_HOME=/opt/wgas
+SYSTEMD_PATH=/lib/systemd/system/wgas.service
+
+# Update package metadata and install base dependencies
+apt-get update
+apt-get install -y git sudo gettext
+
+# Install WireGuard
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:wireguard/wireguard
+apt-get update
+apt-get install -y "linux-headers-$(uname -r)"
+apt-get install -y wireguard iptables resolvconf
+
+# Install Rust dependencies
+apt-get install -y build-essential
+
+# Create app user and directory
+useradd $APP_USER -s /sbin/nologin -M
+mkdir -p $APP_HOME
+chown -R ubuntu:ubuntu $APP_HOME
+
+# Install Rust and build application
+cat << EOF > /opt/install_app.sh
+#!/bin/bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | RUSTUP_HOME=~/.rustup sh -s -- -y
+source ~/.cargo/env
+git clone $APP_REPO $APP_HOME
+cd $APP_HOME
+rustup override set nightly
+cargo build --release
+EOF
+chmod +x /opt/install_app.sh
+sudo -u ubuntu /opt/install_app.sh
+
+# Add app user to sudoers file
+echo "$APP_USER ALL=(ALL) NOPASSWD: $(which wg), $(which wg-quick)" >> /etc/sudoers
+
+# Setup systemd service
+cat $APP_HOME/util/wgas.service | envsubst > $SYSTEMD_PATH
+chmod 755 $SYSTEMD_PATH
+systemctl daemon-reload
+systemctl enable wgas-rs
+systemctl start wgas-rs
