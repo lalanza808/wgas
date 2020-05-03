@@ -34,7 +34,7 @@ rustup override set nightly
 cargo build --release
 EOF
 chmod +x /opt/install_app.sh
-sudo -u ubuntu /opt/install_app.sh
+sudo -u ubuntu -E /opt/install_app.sh
 
 # Add app user to sudoers file
 echo "$APP_USER ALL=(ALL) NOPASSWD: $(which wg), $(which wg-quick)" >> /etc/sudoers
