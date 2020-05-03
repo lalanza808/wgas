@@ -1,5 +1,5 @@
 [package]
-name = "wgas-rs"
+name = "wgas"
 version = "0.1.0"
 authors = ["lalanza808 <lance@lzahq.tech>"]
 edition = "2018"
