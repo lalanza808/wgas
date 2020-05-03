@@ -3,13 +3,20 @@
 # wgas user_data install script (Ubuntu 18.04)
 
 set -x
-set -e
 
-APP_REPO=https://github.com/lalanza808/wgas
-APP_USER=wgas
-APP_SVC=wgas
-APP_HOME=/opt/wgas
-SYSTEMD_PATH=/lib/systemd/system/wgas.service
+export APP_REPO=https://github.com/lalanza808/wgas
+export APP_USER=wgas
+export APP_SVC=wgas
+export APP_HOME=/opt/wgas
+export SYSTEMD_PATH=/lib/systemd/system/wgas.service
+
+# These need to be passed in from the cloud-init or provider data
+export WGAS_PUBKEY=$WGAS_PUBKEY
+export WGAS_ENDPOINT=$WGAS_ENDPOINT
+export WGAS_SUDO=true
+export WGAS_DNS=$WGAS_DNS
+export WGAS_ROUTE=$WGAS_ROUTE
+export WGAS_PORT=$WGAS_PORT
 
 # Update package metadata and install base dependencies
 apt-get update
@@ -50,5 +57,5 @@ echo "$APP_USER ALL=(ALL) NOPASSWD: $(which wg), $(which wg-quick)" >> /etc/sudo
 cat $APP_HOME/util/wgas.service | envsubst > $SYSTEMD_PATH
 chmod 755 $SYSTEMD_PATH
 systemctl daemon-reload
-systemctl enable wgas-rs
-systemctl start wgas-rs
+systemctl enable $APP_SVC
+systemctl start $APP_SVC
