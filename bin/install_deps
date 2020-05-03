@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Install base packages for wgas
+
+set -x
+
+# Update package metadata and install base dependencies
+apt-get update
+apt-get install -y git sudo gettext
+
+# Install WireGuard
+apt-get install -y software-properties-common
+add-apt-repository -y ppa:wireguard/wireguard
+apt-get update
+apt-get install -y "linux-headers-$(uname -r)"
+apt-get install -y wireguard iptables resolvconf
+
+# Install Rust dependencies
+apt-get install -y build-essential

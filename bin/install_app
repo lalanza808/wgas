@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# wgas user_data install script (Ubuntu 18.04)
+# Setup user and install wgas app as service
 
 set -x
 
@@ -17,20 +17,6 @@ export WGAS_SUDO=true
 export WGAS_DNS=$WGAS_DNS
 export WGAS_ROUTE=$WGAS_ROUTE
 export WGAS_PORT=$WGAS_PORT
-
-# Update package metadata and install base dependencies
-apt-get update
-apt-get install -y git sudo gettext
-
-# Install WireGuard
-apt-get install -y software-properties-common
-add-apt-repository -y ppa:wireguard/wireguard
-apt-get update
-apt-get install -y "linux-headers-$(uname -r)"
-apt-get install -y wireguard iptables resolvconf
-
-# Install Rust dependencies
-apt-get install -y build-essential
 
 # Create app user and directory
 useradd $APP_USER -s /sbin/nologin -M
