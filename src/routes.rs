@@ -22,13 +22,13 @@ pub fn home() -> Template {
         whoami.trim_end(),
         hostname.trim_end()
     );
-
     let context: JsonValue = json!({
         "show_config": show_config.trim_end(),
         "uptime": uptime.trim_end(),
         "netstat_info": netstat_info,
         "shell_ps1": shell_ps1,
     });
+
     Template::render("home", context)
 }
 
@@ -36,7 +36,7 @@ pub fn home() -> Template {
 pub fn add_peer() -> Template {
     let new_key = wg_cmd("genkey".to_string());
     let state = WireGuardOptions { ..Default::default() };
-    let full_config = format!("[Interface]
+    let peer_config = format!("[Interface]
 PrivateKey = {}
 Address = 10.66.66.2/32
 DNS = {}
@@ -54,12 +54,13 @@ PersistentKeepalive = 21",
         state.port
     );
     let qr_code: String = qrcode_generator::to_svg_to_string(
-        &full_config, QrCodeEcc::Low, 256, None
+        &peer_config, QrCodeEcc::Low, 256, None
     ).unwrap();
     let qr_code: String = base64::encode(qr_code);
     let context: JsonValue = json!({
         "qr_code": qr_code,
-        "full_config": full_config
+        "peer_config": peer_config
     });
+
     Template::render("add_peer", context)
 }

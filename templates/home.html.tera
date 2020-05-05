@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<meta http-equiv="refresh" content="5">
 <section id="top" class="">
   <div class="container">
     <header>
@@ -12,11 +13,11 @@
 {{ shell_ps1 }} <strong>uptime</strong>
 {{ uptime }}
 
-{{ shell_ps1 }} <strong>netstat -tan | grep "ESTABLISHED\|CLOSE_WAIT"</strong>
-{{ netstat_info }}
-
 {{ shell_ps1 }} <strong>wg show</strong>
 {% if show_config %}{{ show_config }}{% else %}It doesn't look like the tunnel interface is up yet.{% endif %}
+
+{{ shell_ps1 }} <strong>netstat -tan | grep "ESTABLISHED\|CLOSE_WAIT"</strong>
+{{ netstat_info }}
     </div>
   </div>
 </section>
