@@ -952,7 +952,7 @@
 		/* Header */
 
 			#header {
-				@include vendor('backface-visibility', 'hidden');
+				// @include vendor('backface-visibility', 'hidden');
 				@include vendor('transform', 'translateX(#{_size(header) * -1})');
 				@include vendor('transition', ('transform #{_duration(header)} ease'));
 				-webkit-overflow-scrolling: touch;
@@ -1142,4 +1142,17 @@
 				}
 			}
 
+	}
+
+
+	.code {
+		text-align: left;
+		line-height: 1em;
+		font-size: .6em;
+		margin-left: 20%;
+		padding-bottom: 3em;
+		display: block;
+	  unicode-bidi: embed;
+	  font-family: monospace;
+	  white-space: pre;
 	}
