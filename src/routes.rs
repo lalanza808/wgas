@@ -4,20 +4,24 @@ mod data;
 mod helpers;
 
 use data::WireGuardOptions;
-use helpers::genkey;
+use helpers::wg_cmd;
 use rocket_contrib::templates::Template;
 use rocket_contrib::json::JsonValue;
 use qrcode_generator::QrCodeEcc;
 
 
 #[get("/")]
-pub fn index() -> String {
-    "sup dog".to_string()
+pub fn index() -> Template {
+    let current_config = wg_cmd("show".to_string());
+    let context: JsonValue = json!({
+        "show_config": current_config
+    });
+    Template::render("index", context)
 }
 
 #[get("/generate")]
 pub fn generate() -> Template {
-    let new_key = genkey();
+    let new_key = wg_cmd("genkey".to_string());
     let state = WireGuardOptions { ..Default::default() };
     let full_config = format!("[Interface]
 PrivateKey = {}
@@ -44,5 +48,5 @@ PersistentKeepalive = 21",
         "qr_code": qr_code,
         "full_config": full_config
     });
-    Template::render("new", context)
+    Template::render("generate", context)
 }

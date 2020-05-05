@@ -1,13 +1,13 @@
 use std::process::Command;
 
 
-pub fn genkey() -> String {
+pub fn wg_cmd(arg: String) -> String {
     let output = Command::new("./bin/wg_cmd")
-        .arg("genkey")
+        .arg(arg)
         .output()
         .expect("failed to execute process");
-    let privkey = String::from_utf8(output.stdout)
+    let output_str = String::from_utf8(output.stdout)
         .unwrap();
 
-    privkey
+    output_str
 }
