@@ -13,7 +13,7 @@ sudo add-apt-repository ppa:wireguard/wireguard -y
 sudo apt install wireguard -y
 
 # macOS
-brew install wireguard-tools
+brew bundle
 ```
 
 This is a Rust application so install via `rustup`:
