@@ -31,7 +31,6 @@ rustup override set nightly
 cargo run
 ```
 
-```
 
 From there set environment variables:
 
