@@ -1,0 +1,17 @@
+{% extends "base" %}
+
+{% block content %}
+
+<section id="top" class="">
+  <div class="container">
+
+    <header>
+      <h2 class="alt">Welcome</h2>
+      <p>{% if show_config %}{{ show_config }}{% else %}It doesn't look like the tunnel interface is up yet.{% endif %}</p>
+    </header>
+
+  </div>
+</section>
+
+
+{% endblock content %}
