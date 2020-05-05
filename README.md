@@ -36,7 +36,7 @@ From there set environment variables:
 
 ```
 export WGAS_ENDPOINT=127.0.0.1
-export WGAS_SUDO=false
+export WGAS_SUDO=false  # set to true if deploying on live VPN instance
 export WGAS_DNS=1.1.1.1 # set to dns you control if possible
 export WGAS_ROUTE=0.0.0.0/0
 export WGAS_PORT=51820
@@ -47,5 +47,5 @@ and use `cargo` to run the dev server or build production release binaries:
 
 ```
 cargo run
-cargo build --release # outputs to ./target/release/<package_nae>
+cargo build --release # outputs to ./target/release/<package_name>
 ```

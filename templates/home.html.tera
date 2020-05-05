@@ -1,0 +1,24 @@
+{% extends "base" %}
+
+{% block content %}
+
+<section id="top" class="">
+  <div class="container">
+    <header>
+      <h2 class="alt">Home</h2>
+      <p>The current tunnel configuration and stats are shown below.</p>
+    </header>
+    <div class="code">
+{{ shell_ps1 }} <strong>uptime</strong>
+{{ uptime }}
+
+{{ shell_ps1 }} <strong>netstat -tan | grep "ESTABLISHED\|CLOSE_WAIT"</strong>
+{{ netstat_info }}
+
+{{ shell_ps1 }} <strong>wg show</strong>
+{% if show_config %}{{ show_config }}{% else %}It doesn't look like the tunnel interface is up yet.{% endif %}
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

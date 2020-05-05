@@ -29,7 +29,7 @@
 						<nav id="nav">
 							<ul>
 								<li><a href="/" id="top-link"><span class="icon solid fa-home">Home</span></a></li>
-                <li><a href="/generate" id="about-link"><span class="icon solid fa-user">Add New Peers</span></a></li>
+                <li><a href="/add-peer" id="about-link"><span class="icon solid fa-user">Add A Peer</span></a></li>
 								<!-- <li><a href="#portfolio" id="portfolio-link"><span class="icon solid fa-th">wip</span></a></li>
 								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">wip</span></a></li> -->
 							</ul>
@@ -73,9 +73,7 @@
 
 		<!-- Scripts -->
 			<script src="/static/js/jquery.min.js"></script>
-			<script src="/static/js/jquery.scrolly.min.js"></script>
-			<script src="/static/js/jquery.scrollex.min.js"></script>
-			<script src="/static/js/browser.min.js"></script>
+			<!-- <script src="/static/js/browser.min.js"></script> -->
 			<script src="/static/js/breakpoints.min.js"></script>
 			<script src="/static/js/util.js"></script>
 			<script src="/static/js/main.js"></script>
