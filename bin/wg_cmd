@@ -1,6 +1,6 @@
 #!/bin/bash
 
-WGAS_SUDO=${:-false}
+WGAS_SUDO=${-:false}
 
 if [[ $WGAS_SUDO == "true" ]]; then
   sudo wg "$@"
