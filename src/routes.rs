@@ -3,20 +3,22 @@ mod data;
 #[path = "helpers.rs"]
 mod helpers;
 
-use data::WireGuardOptions;
+use data::{WireGuardOptions, PeerConfig};
 use helpers::{wg_cmd, sh_cmd};
 use rocket_contrib::templates::Template;
-use rocket_contrib::json::JsonValue;
-use qrcode_generator::QrCodeEcc;
+use rocket_contrib::json::{JsonValue, Json};
+use std::fs::File;
+use std::io::prelude::*;
+use std::fs;
 
 
 #[get("/")]
 pub fn home() -> Template {
-    let show_config = wg_cmd("show".to_string());
-    let whoami = sh_cmd("whoami".to_string());
-    let uptime = sh_cmd("uptime".to_string());
-    let hostname = sh_cmd("hostname".to_string());
-    let netstat_info = sh_cmd("netstat -tan | grep \"ESTABLISHED\\|CLOSE_WAIT\"".to_string());
+    let show_config = wg_cmd(&["show"]);
+    let whoami = sh_cmd("whoami");
+    let uptime = sh_cmd("uptime");
+    let hostname = sh_cmd("hostname");
+    let netstat_info = sh_cmd("netstat -tan | grep \"ESTABLISHED\\|CLOSE_WAIT\"");
     let shell_ps1 = format!(
         "{}@{} $",
         whoami.trim_end(),
@@ -34,33 +36,35 @@ pub fn home() -> Template {
 
 #[get("/add-peer")]
 pub fn add_peer() -> Template {
-    let new_key = wg_cmd("genkey".to_string());
+    let new_key = wg_cmd(&["genkey"]);
     let state = WireGuardOptions { ..Default::default() };
-    let peer_config = format!("[Interface]
-PrivateKey = {}
-Address = 10.66.66.2/32
-DNS = {}
-
-[Peer]
-PublicKey = {}
-AllowedIPs = {}
-Endpoint = {}:{}
-PersistentKeepalive = 21",
-        new_key.trim_end(),
-        state.dns,
-        state.pubkey,
-        state.route,
-        state.endpoint,
-        state.port
-    );
-    let qr_code: String = qrcode_generator::to_svg_to_string(
-        &peer_config, QrCodeEcc::Low, 256, None
-    ).unwrap();
-    let qr_code: String = base64::encode(qr_code);
     let context: JsonValue = json!({
-        "qr_code": qr_code,
-        "peer_config": peer_config
+        "privkey": new_key.trim_end(),
+        "state": state,
     });
 
     Template::render("add_peer", context)
+}
+
+#[post("/save-peer", data = "<peer_config>")]
+pub fn save_peer_config(peer_config: Json<PeerConfig>) -> JsonValue {
+    println!("{:#?}", peer_config);
+//     let peer_config = format!("[Peer]
+// # name = {}
+// PublicKey = {}
+// AllowedIPs = {}/32")
+//     let mut file = File::create("/tmp/wgas.conf").unwrap();
+//     let conf_str = serde_json::to_string(&input.into_inner()).unwrap();
+//     file.write_all().unwrap();
+//     let wg_set = wg_cmda(&["set", "wg0", "private-key", "/tmp/wgas.conf"]); // todo - randomize
+    // let file_removed = match fs::remove_file("/tmp/wgas.conf"){
+    //     Ok(_) => true,
+    //     Err(_) => false
+    // };
+    json!({
+        "eyo": "hello",
+        "config_data": "asd",
+        // "response": wg_set.trim_end(),
+        // "key_cleared": file_removed
+    })
 }

@@ -15,3 +15,7 @@ Cargo.lock
 /target
 
 Brewfile.lock.json
+
+/etc/privkey
+/etc/pubkey
+/etc/wg0.conf

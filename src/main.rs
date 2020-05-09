@@ -1,7 +1,7 @@
 #![feature(proc_macro_hygiene, decl_macro, plugin)]
 #[macro_use] extern crate rocket;
 #[macro_use] extern crate rocket_contrib;
-extern crate qrcode_generator;
+#[macro_use] extern crate serde_derive;
 mod routes;
 mod data;
 
@@ -21,7 +21,7 @@ fn main() {
     println!("{:#?}", wg_opts);
     rocket::ignite()
         .mount("/", routes![
-            routes::home, routes::add_peer
+            routes::home, routes::add_peer, routes::save_peer_config,
         ])
         .mount("/static", StaticFiles::from("./static"))
         .register(catchers![not_found])
