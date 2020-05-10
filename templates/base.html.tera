@@ -12,20 +12,13 @@
 		<link rel="stylesheet" href="/static/css/main.css" />
 	</head>
 	<body class="is-preload">
-
-		<!-- Header -->
 			<div id="header">
-
 				<div class="top">
-
-					<!-- Logo -->
 						<div id="logo">
 							<span class="image"><img src="/static/images/wireguard.png" alt="" /></span>
 							<h1 id="title">Administrator</h1>
 							<p>WireGuard Access Server</p>
 						</div>
-
-					<!-- Nav -->
 						<nav id="nav">
 							<ul>
 								<li><a href="/"><span class="icon solid fa-home">Home</span></a></li>
@@ -34,49 +27,18 @@
 								<li><a href="#contact" id="contact-link"><span class="icon solid fa-envelope">wip</span></a></li> -->
 							</ul>
 						</nav>
-
 				</div>
-
 				<div class="bottom">
-
-					<!-- Social Icons -->
 						<ul class="icons">
 							<li><a href="https://twitter.com/lza_menace" target=_blank class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
 							<li><a href="https://github.com/lalanza808/wgas" target=_blank class="icon brands fa-github"><span class="label">Github</span></a></li>
 							<li><a href="http://html5up.net" target=_blank class="icon brands fa-dribbble"><span class="label">License</span></a></li>
 						</ul>
-
-
 				</div>
-
 			</div>
-
-
-
-		<!-- Main -->
 			<div id="main">
-
         {% block content %}
         {% endblock content %}
-
 			</div>
-
-		<!-- Footer -->
-	   <!-- <div id="footer"> -->
-
-				<!-- Copyright -->
-					<!-- <ul class="copyright">
-						<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-					</ul> -->
-
-			<!-- </div> -->
-
-		<!-- Scripts -->
-			<!-- <script src="/static/js/jquery.min.js"></script> -->
-			<!-- <script src="/static/js/browser.min.js"></script> -->
-			<!-- <script src="/static/js/breakpoints.min.js"></script> -->
-			<!-- <script src="/static/js/util.js"></script> -->
-			<!-- <script src="/static/js/main.js"></script> -->
-
 	</body>
 </html>
