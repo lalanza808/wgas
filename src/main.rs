@@ -21,7 +21,7 @@ fn main() {
     println!("{:#?}", wg_opts);
     rocket::ignite()
         .mount("/", routes![
-            routes::home, routes::add_peer, routes::save_peer_config,
+            routes::home, routes::add_peer, routes::save_peer,
         ])
         .mount("/static", StaticFiles::from("./static"))
         .register(catchers![not_found])
