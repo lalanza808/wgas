@@ -15,6 +15,7 @@ Environment=WGAS_SUDO=$WGAS_SUDO
 Environment=WGAS_DNS=$WGAS_DNS
 Environment=WGAS_ROUTE=$WGAS_ROUTE
 Environment=WGAS_PORT=$WGAS_PORT
+Environment=WGAS_NETWORK=$WGAS_NETWORK
 
 Restart=on-failure
 RestartSec=10
