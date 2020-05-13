@@ -39,6 +39,8 @@ export WGAS_ENDPOINT=127.0.0.1
 export WGAS_SUDO=false  # set to true if deploying on live VPN instance
 export WGAS_DNS=1.1.1.1 # set to dns you control if possible
 export WGAS_ROUTE=0.0.0.0/0
+export WGAS_INTERFACE=wg0
+export WGAS_NETWORK=10.66.66.1/24
 export WGAS_PORT=51820
 export WGAS_PUBKEY=$(wg genkey | wg pubkey)
 ```

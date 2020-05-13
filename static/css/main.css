@@ -2146,4 +2146,15 @@ button:active,
   margin: 0 auto;
 }
 
+#command-result {
+  font-weight: bold;
+  color: #49a865;
+  padding-top: 1em;
+}
+
+.peer-text {
+  margin: 0;
+  padding: 0;
+}
+
 /*# sourceMappingURL=main.css.map */
