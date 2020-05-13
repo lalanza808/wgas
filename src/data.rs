@@ -10,6 +10,7 @@ pub struct WireGuardOptions {
     pub sudo: String,
     pub port: String,
     pub dns: String,
+    pub network: String,
     pub interface: String
 }
 
@@ -23,7 +24,8 @@ impl Default for WireGuardOptions {
             dns: env::var("WGAS_DNS").unwrap_or("1.1.1.1".to_string()),
             route: env::var("WGAS_ROUTE").unwrap_or("0.0.0.0/0".to_string()),
             port: env::var("WGAS_PORT").unwrap_or(51820.to_string()),
-            interface: env::var("WGAS_INTERFACE").unwrap_or("10.66.66.1/24".to_string()),
+            network: env::var("WGAS_NETWORK").unwrap_or("10.66.66.1/24".to_string()),
+            interface: env::var("WGAS_INTERFACE").unwrap_or("wg0".to_string()),
         }
     }
 }
