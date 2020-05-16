@@ -16,7 +16,7 @@ use std::fs;
 pub fn home() -> Template {
     let show_config_cmd = wg_cmd(vec!["show".to_string()]);
     let whoami = sh_cmd("whoami".to_string());
-    let uptime = sh_cmd("uptime".to_string());
+    let w = sh_cmd("w".to_string());
     let hostname = sh_cmd("hostname".to_string());
     let netstat_info = sh_cmd("netstat -tan | grep \"ESTABLISHED\\|CLOSE_WAIT\"".to_string());
     let shell_ps1 = format!(
@@ -26,7 +26,7 @@ pub fn home() -> Template {
     );
     let context: JsonValue = json!({
         "show_config": show_config_cmd.0.trim_end(),
-        "uptime": uptime.trim_end(),
+        "w": w.trim_end(),
         "netstat_info": netstat_info,
         "shell_ps1": shell_ps1,
     });

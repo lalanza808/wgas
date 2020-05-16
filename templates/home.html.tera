@@ -10,8 +10,8 @@
       <p>The current tunnel configuration and stats are shown below.</p>
     </header>
     <div class="code">
-{{ shell_ps1 }} <strong>uptime</strong>
-{{ uptime }}
+{{ shell_ps1 }} <strong>w</strong>
+{{ w }}
 
 {{ shell_ps1 }} <strong>wg show</strong>
 {% if show_config %}{{ show_config }}{% else %}It doesn't look like the tunnel interface is up yet.{% endif %}
